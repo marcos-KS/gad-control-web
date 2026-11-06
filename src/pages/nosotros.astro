@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Brands from '../components/Brands.astro';
+import Icon from '../components/Icon.astro';
+const blocks = [
+  ['Quiénes somos', 'G.A.D. Control es una empresa de instrumentación y control industrial con base en San Martín, Mendoza. [Completar con la presentación real de la empresa.]'],
+  ['Qué hacemos', 'Trabajamos en medición, automatización y control de procesos industriales. El detalle de servicios está en la sección Servicios, sujeto a confirmación.'],
+  ['Enfoque de trabajo', 'Cada instalación es distinta: relevamos, proponemos una solución técnica, implementamos y verificamos. [Ajustar al método real.]'],
+  ['Calidad y seguridad', 'Trabajamos con atención a la calidad de ejecución y a la seguridad de las personas y las instalaciones. [Completar con normas y prácticas reales.]'],
+];
+const caps = ['Instrumentación de procesos', 'Señales 4–20 mA', 'PLC y HMI', 'Tableros de control'];
+---
+<Layout title="Nosotros" description="Conozca a G.A.D. Control, empresa de instrumentación y control industrial en San Martín, Mendoza.">
+  <PageHero eyebrow="Nosotros" title="G.A.D. Control" text="Instrumentación y Control Industrial en San Martín, Mendoza." />
+  <section class="section"><div class="container-x grid gap-6 md:grid-cols-2">
+    {blocks.map(([t, d]) => <div class="card card-hover reveal p-6"><h2 class="text-xl font-extrabold">{t}</h2><p class="mt-3 text-graphite">{d}</p></div>)}
+  </div></section>
+
+  <!-- GALERÍA DE TRABAJO REAL / TALLER -->
+  <section class="section bg-mist">
+    <div class="container-x">
+      <div class="reveal text-center">
+        <span class="eyebrow mx-auto">Trabajo en campo y taller</span>
+        <h2 class="h2 mx-auto">Compromiso técnico en cada detalle</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-graphite">Fotografías reales de montajes de tableros, diagnósticos termográficos y automatización industrial.</p>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="card card-hover reveal overflow-hidden">
+          <div class="h-64 overflow-hidden">
+            <img src="/img/servicios/tablero-completo.jpg" alt="Tablero industrial completo de potencia y PLC" class="h-full w-full object-cover transition-transform duration-500 hover:scale-110" />
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-electric">Tableros de control</span>
+            <p class="mt-1 font-bold text-navy">Gabinete de potencia y automatización</p>
+            <p class="mt-1 text-xs text-graphite">Interruptores en caja moldeada, protecciones y PLC integrado.</p>
+          </div>
+        </div>
+
+        <div class="card card-hover reveal overflow-hidden">
+          <div class="h-64 overflow-hidden">
+            <img src="/img/servicios/componentes-tablero.png" alt="Riel DIN con componentes Siemens y cableado ordenado" class="h-full w-full object-cover transition-transform duration-500 hover:scale-110" />
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-mint">Montaje normalizado</span>
+            <p class="mt-1 font-bold text-navy">Distribución y cableado identificado</p>
+            <p class="mt-1 text-xs text-graphite">Componentes de primeras marcas (Siemens Sirius), borneras y canaletas ranuradas.</p>
+          </div>
+        </div>
+
+        <div class="card card-hover reveal overflow-hidden sm:col-span-2 lg:col-span-1">
+          <div class="h-64 overflow-hidden">
+            <img src="/img/servicios/termografia-diagnostico.png" alt="Inspección con cámara termográfica de tablero eléctrico" class="h-full w-full object-cover transition-transform duration-500 hover:scale-110" />
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-bold uppercase tracking-wider text-electric">Diagnóstico predictivo</span>
+            <p class="mt-1 font-bold text-navy">Termografía infrarroja en tableros</p>
+            <p class="mt-1 text-xs text-graphite">Detección temprana de puntos calientes y falsos contactos sin detener la línea.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"><div class="container-x">
+    <h2 class="h2">Capacidades técnicas</h2>
+    <p class="mt-3 text-graphite">Lista preliminar, a validar.</p>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{caps.map((c) => <li class="card card-hover reveal flex items-center gap-3 p-5"><Icon name="check" class="text-mint" />{c}</li>)}</ul>
+  </div></section>
+  <Brands />
+  <section class="section bg-mist"><div class="container-x">
+    <h2 class="h2">Formación y certificaciones</h2>
+    <p class="mt-4 max-w-2xl text-graphite">Esta sección se completará cuando se disponga de información real y verificable.</p>
+  </div></section>
+  <CtaBand />
+</Layout>

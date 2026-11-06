@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { projects, categories } from '../../data/projects';
+---
+<Layout title="Proyectos" description="Portfolio técnico de proyectos de G.A.D. Control.">
+  <PageHero eyebrow="Proyectos" title="Portfolio técnico" text="Los proyectos con la etiqueta “Ejemplo editable” son demostraciones y no corresponden a trabajos reales." />
+  <section class="section">
+    <div class="container-x">
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por categoría">
+        <button class="filter btn btn-primary" data-filter="all" aria-pressed="true">Todos</button>
+        {categories.map((c) => <button class="filter btn btn-outline-dark" data-filter={c} aria-pressed="false">{c}</button>)}
+      </div>
+      <div id="grid" class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => <div class="reveal" data-item={p.category}><ProjectCard project={p} /></div>)}
+      </div>
+      <p id="empty" class="mt-8 hidden text-graphite">No hay proyectos en esta categoría todavía.</p>
+    </div>
+  </section>
+  <CtaBand />
+</Layout>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const items = document.querySelectorAll<HTMLElement>('[data-item]');
+  const empty = document.getElementById('empty')!;
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.filter;
+    let shown = 0;
+    items.forEach((i) => { const ok = f === 'all' || i.dataset.item === f; i.hidden = !ok; if (ok) shown++; });
+    btns.forEach((x) => {
+      const on = x === b;
+      x.setAttribute('aria-pressed', String(on));
+      x.classList.toggle('btn-primary', on);
+      x.classList.toggle('btn-outline-dark', !on);
+    });
+    empty.classList.toggle('hidden', shown > 0);
+  }));
+</script>

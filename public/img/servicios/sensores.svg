@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#091827" />
+      <stop offset="100%" stop-color="#0F2B45" />
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B7D8F" />
+      <stop offset="50%" stop-color="#344658" />
+      <stop offset="100%" stop-color="#1B2633" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg2)" />
+
+  <!-- Sensor cilíndrico M18 / M30 inductivo / óptico -->
+  <g transform="translate(160, 225) rotate(-25)">
+    <!-- Rosca metálica con ranuras -->
+    <rect x="-100" y="-35" width="240" height="70" rx="4" fill="url(#body)" stroke="#168BFF" stroke-width="2" />
+    <!-- Ranuras de rosca -->
+    <line x1="-70" y1="-35" x2="-70" y2="35" stroke="#102030" stroke-width="4" />
+    <line x1="-40" y1="-35" x2="-40" y2="35" stroke="#102030" stroke-width="4" />
+    <line x1="-10" y1="-35" x2="-10" y2="35" stroke="#102030" stroke-width="4" />
+    <line x1="20" y1="-35" x2="20" y2="35" stroke="#102030" stroke-width="4" />
+    <line x1="50" y1="-35" x2="50" y2="35" stroke="#102030" stroke-width="4" />
+    <line x1="80" y1="-35" x2="80" y2="35" stroke="#102030" stroke-width="4" />
+    <line x1="110" y1="-35" x2="110" y2="35" stroke="#102030" stroke-width="4" />
+
+    <!-- Tuerca de fijación -->
+    <rect x="0" y="-48" width="28" height="96" rx="3" fill="#2E4052" stroke="#3DDC97" stroke-width="2" />
+
+    <!-- Cabezal sensible frontal (óptico/inductivo/capacitivo) -->
+    <path d="M 140 -35 L 175 -25 L 175 25 L 140 35 Z" fill="#168BFF" stroke="#3DDC97" stroke-width="2" />
+    <ellipse cx="175" cy="0" rx="6" ry="25" fill="#3DDC97" />
+
+    <!-- LED indicador de estado posterior -->
+    <circle cx="-85" cy="0" r="10" fill="#3DDC97" />
+    <circle cx="-85" cy="0" r="16" fill="none" stroke="#3DDC97" stroke-width="2" opacity="0.6" />
+
+    <!-- Cable posterior flexible con conector M12 -->
+    <rect x="-140" y="-18" width="40" height="36" rx="4" fill="#101820" />
+    <path d="M -140 0 C -220 0 -260 80 -300 90" fill="none" stroke="#101C26" stroke-width="18" stroke-linecap="round" />
+  </g>
+
+  <!-- Haz de detección / Onda de sensado -->
+  <g transform="translate(460, 90)">
+    <path d="M 0 0 L 220 -50 L 220 50 Z" fill="#3DDC97" fill-opacity="0.12" />
+    <path d="M 60 -15 A 70 70 0 0 1 60 15" fill="none" stroke="#3DDC97" stroke-width="3" stroke-linecap="round" />
+    <path d="M 110 -30 A 120 120 0 0 1 110 30" fill="none" stroke="#168BFF" stroke-width="4" stroke-linecap="round" />
+    <path d="M 160 -45 A 170 170 0 0 1 160 45" fill="none" stroke="#3DDC97" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round" />
+
+    <!-- Blanco / Objeto detectado en movimiento -->
+    <rect x="220" y="-45" width="45" height="90" rx="4" fill="#14314D" stroke="#3DDC97" stroke-width="2" />
+    <text x="242" y="10" font-family="sans-serif" font-size="11" font-weight="bold" fill="#3DDC97" text-anchor="middle">TARGET</text>
+  </g>
+
+  <!-- Datos y telemetría de esquina -->
+  <text x="50" y="70" font-family="'Manrope', sans-serif" font-size="14" font-weight="800" letter-spacing="3" fill="#3DDC97">DETECCIÓN &amp; CONVERSIÓN</text>
+  <text x="50" y="95" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">Sensores y Transmisores</text>
+  <text x="50" y="120" font-family="sans-serif" font-size="12" fill="#8FA4B8">Inductivos · Capacitivos · Ópticos · Presión</text>
+</svg>

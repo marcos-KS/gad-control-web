@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { services } from '../data/services';
+import { site, whatsappUrl } from '../data/site';
+---
+<Layout title="Contacto" description="Solicite un presupuesto o realice una consulta técnica a G.A.D. Control.">
+  <PageHero eyebrow="Contacto" title="Solicitar presupuesto o consulta" text="Cuéntenos su necesidad. Los campos con * son obligatorios." />
+  <section class="section"><div class="container-x grid gap-12 lg:grid-cols-3">
+    <form id="form" data-key={site.web3formsKey} class="card space-y-5 p-6 sm:p-8 lg:col-span-2" novalidate>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div><label for="nombre" class="text-sm font-semibold">Nombre y apellido *</label><input id="nombre" name="nombre" class="input" autocomplete="name" required /><p class="err mt-1 text-sm text-red-700" id="e-nombre"></p></div>
+        <div><label for="empresa" class="text-sm font-semibold">Empresa (opcional)</label><input id="empresa" name="empresa" class="input" autocomplete="organization" /></div>
+        <div><label for="email" class="text-sm font-semibold">Correo electrónico *</label><input id="email" name="email" type="email" class="input" autocomplete="email" required /><p class="err mt-1 text-sm text-red-700" id="e-email"></p></div>
+        <div><label for="telefono" class="text-sm font-semibold">Teléfono o WhatsApp *</label><input id="telefono" name="telefono" type="tel" class="input" autocomplete="tel" required /><p class="err mt-1 text-sm text-red-700" id="e-telefono"></p></div>
+      </div>
+      <div><label for="servicio" class="text-sm font-semibold">Servicio de interés *</label>
+        <select id="servicio" name="servicio" class="input" required>
+          <option value="">Seleccione una opción</option>
+          {services.filter((s) => s.active).map((s) => <option value={s.title} data-slug={s.slug}>{s.title}</option>)}
+          <option value="Otro / no estoy seguro">Otro / no estoy seguro</option>
+        </select><p class="err mt-1 text-sm text-red-700" id="e-servicio"></p></div>
+      <div><label for="mensaje" class="text-sm font-semibold">Descripción del proyecto o problema *</label><textarea id="mensaje" name="mensaje" rows="5" class="input" required minlength="10"></textarea><p class="err mt-1 text-sm text-red-700" id="e-mensaje"></p></div>
+      <!-- Honeypot anti-spam: los usuarios reales no lo ven -->
+      <div class="absolute -left-[9999px]" aria-hidden="true"><label>No completar<input name="web" tabindex="-1" autocomplete="off" /></label></div>
+      <div><label class="flex items-start gap-3 text-sm"><input type="checkbox" id="privacidad" name="privacidad" class="mt-1 h-4 w-4" required /><span>Acepto el <a href="/privacidad" class="font-semibold text-tech underline">aviso de privacidad</a> *</span></label><p class="err mt-1 text-sm text-red-700" id="e-privacidad"></p></div>
+      <button id="submit" type="submit" class="btn-primary w-full sm:w-auto">Enviar consulta</button>
+      <div id="status" role="status" aria-live="polite" class="text-sm"></div>
+    </form>
+    <aside class="space-y-4">
+      <div class="card p-6"><h2 class="font-bold">Contacto directo</h2>
+        <ul class="mt-3 space-y-2 text-sm text-graphite">
+          <li>WhatsApp: <a class="font-semibold text-tech" href={whatsappUrl()} target="_blank" rel="noopener">{site.whatsappDisplay}</a></li>
+          <li>Teléfono: <a class="font-semibold text-tech" href={site.phoneHref}>{site.phone}</a></li>
+          <li>Correo: {site.email ? <a class="font-semibold text-tech" href={`mailto:${site.email}`}>{site.email}</a> : 'a confirmar'}</li>
+          <li>{site.city}</li>
+        </ul></div>
+    </aside>
+  </div></section>
+</Layout>
+
+<script>
+  const form = document.getElementById('form') as HTMLFormElement;
+  const status = document.getElementById('status')!;
+  const btn = document.getElementById('submit') as HTMLButtonElement;
+  const q = new URLSearchParams(location.search);
+  const sel = document.getElementById('servicio') as HTMLSelectElement;
+  const pre = q.get('servicio');
+  if (pre) [...sel.options].forEach((o) => { if (o.dataset.slug === pre) sel.value = o.value; });
+  if (q.get('proyecto')) (document.getElementById('mensaje') as HTMLTextAreaElement).value = `Consulta por una solución similar al proyecto: ${q.get('proyecto')}\n\n`;
+  const loadedAt = Date.now();
+
+  const rules: Record<string, (v: string, f: FormData) => string> = {
+    nombre: (v) => (v.trim().length < 3 ? 'Ingrese su nombre y apellido.' : ''),
+    email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Ingrese un correo válido, por ejemplo nombre@empresa.com.'),
+    telefono: (v) => (v.replace(/\D/g, '').length < 8 ? 'Ingrese un teléfono válido, con código de área.' : ''),
+    servicio: (v) => (v ? '' : 'Seleccione un servicio de interés.'),
+    mensaje: (v) => (v.trim().length < 10 ? 'Describa brevemente su necesidad (mínimo 10 caracteres).' : ''),
+    privacidad: (_v, f) => (f.get('privacidad') ? '' : 'Debe aceptar el aviso de privacidad para continuar.'),
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = ''; status.className = 'text-sm';
+    const fd = new FormData(form);
+    let first: HTMLElement | null = null;
+    for (const [k, fn] of Object.entries(rules)) {
+      const msg = fn(String(fd.get(k) ?? ''), fd);
+      const el = document.getElementById(k)!;
+      document.getElementById('e-' + k)!.textContent = msg;
+      el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (msg && !first) first = el;
+    }
+    if (first) { first.focus(); return; }
+
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    try {
+      const accessKey = document.getElementById('form')?.getAttribute('data-key') || 'YOUR_ACCESS_KEY_HERE';
+      
+      // Honeypot antispam
+      if (fd.get('web') || (Date.now() - loadedAt < 2500)) {
+        // Descarte silencioso para bots
+        status.className = 'rounded-lg bg-green-50 p-4 text-sm font-semibold text-green-800';
+        status.textContent = 'Recibimos su consulta. Nos pondremos en contacto a la brevedad.';
+        form.reset();
+        return;
+      }
+
+      // Si aún no se configuró la key de Web3Forms, se avisa amablemente o se deriva a WhatsApp
+      if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        const tel = String(fd.get('telefono') ?? '');
+        const nom = String(fd.get('nombre') ?? '');
+        const srv = String(fd.get('servicio') ?? '');
+        const msg = String(fd.get('mensaje') ?? '');
+        const waMsg = encodeURIComponent(`Hola, mi nombre es ${nom}. Consulta sobre ${srv}:\n${msg}\nContacto: ${tel}`);
+        status.className = 'rounded-lg bg-blue-50 border border-blue-200 p-4 text-sm text-navy';
+        status.innerHTML = `
+          <p class="font-bold text-tech">Para enviar directamente su consulta:</p>
+          <p class="mt-1 text-graphite">Haga clic a continuación para remitirla al instante por WhatsApp:</p>
+          <a href="https://wa.me/5492634352313?text=${waMsg}" target="_blank" rel="noopener" class="btn-primary mt-3 inline-flex text-xs py-2">
+            Enviar por WhatsApp ahora
+          </a>
+        `;
+        return;
+      }
+
+      const payload = {
+        access_key: accessKey,
+        subject: `Consulta Web G.A.D. Control: ${fd.get('servicio')} - ${fd.get('nombre')}`,
+        from_name: 'Web G.A.D. Control',
+        nombre: fd.get('nombre'),
+        empresa: fd.get('empresa') || 'No especificada',
+        email: fd.get('email'),
+        telefono: fd.get('telefono'),
+        servicio: fd.get('servicio'),
+        mensaje: fd.get('mensaje'),
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      
+      if (res.ok && data.success) {
+        status.className = 'rounded-lg bg-green-50 border border-green-200 p-4 text-sm font-semibold text-green-800';
+        status.textContent = '¡Recibimos su consulta exitosamente! Nos pondremos en contacto a la brevedad.';
+        form.reset();
+      } else {
+        throw new Error(data.message || 'Error en el envío.');
+      }
+    } catch (err) {
+      status.className = 'rounded-lg bg-red-50 border border-red-200 p-4 text-sm font-semibold text-red-800';
+      status.textContent = 'No pudimos enviar su consulta por correo en este momento. Por favor contáctenos directamente por WhatsApp.';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Enviar consulta';
+    }
+  });
+</script>

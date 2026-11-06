@@ -1,0 +1,19 @@
+---
+import { whatsappUrl } from '../data/site';
+import Icon from './Icon.astro';
+const { title = '¿Tiene una necesidad de medición o control?', text = 'Cuéntenos su caso y le respondemos con una propuesta técnica.' } = Astro.props;
+---
+<section class="relative overflow-hidden bg-gradient-to-br from-navy via-navy-2 to-tech pb-20 text-white">
+  <div class="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-mint/15 blur-3xl"></div>
+  <div class="container-x reveal relative flex flex-col items-start justify-between gap-8 pt-16 sm:pt-20 md:flex-row md:items-center">
+    <div class="max-w-xl">
+      <span class="badge"><span class="h-2 w-2 rounded-full bg-mint"></span> Consultas sin compromiso</span>
+      <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
+      <p class="mt-3 text-white/70">{text}</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a href="/contacto" class="btn-primary">Solicitar presupuesto <Icon name="arrow" class="h-4 w-4" /></a>
+      <a href={whatsappUrl()} target="_blank" rel="noopener" class="btn-outline">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>

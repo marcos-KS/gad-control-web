@@ -1,0 +1,41 @@
+---
+import { brands } from '../data/brands';
+const { title = 'Marcas con las que trabajamos', dark = false } = Astro.props;
+// Duplicado para el carrusel continuo
+const loop = [...brands, ...brands];
+---
+<section class={`section ${dark ? 'bg-navy text-white' : 'bg-white'}`}>
+  <div class="container-x reveal text-center">
+    <p class="eyebrow">Marcas</p>
+    <h2 class="h2 mx-auto">{title}</h2>
+    <p class={`mx-auto mt-4 max-w-2xl ${dark ? 'text-white/70' : 'text-graphite'}`}>Trabajamos con equipos y componentes de fabricantes reconocidos del sector industrial.</p>
+  </div>
+
+  <div class="brands-marquee group relative mt-12 overflow-hidden" aria-label="Marcas">
+    <div class={`pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r ${dark ? 'from-navy' : 'from-white'} to-transparent`}></div>
+    <div class={`pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l ${dark ? 'from-navy' : 'from-white'} to-transparent`}></div>
+    <ul class="marquee-track flex w-max gap-6 py-4">
+      {loop.map((b, i) => (
+        <li aria-hidden={i >= brands.length ? 'true' : undefined}
+            class="brand-card flex h-24 w-56 shrink-0 items-center justify-center rounded-xl border border-navy/10 bg-white px-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-mint hover:shadow-xl"
+            style={`--brand:${b.color}`}>
+          {b.logo
+            ? <img src={b.logo} alt={b.name} class="max-h-12 w-auto grayscale transition duration-300 hover:grayscale-0" loading="lazy" />
+            : <span class="brand-name text-center text-2xl font-extrabold uppercase tracking-tight">{b.name}</span>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .brand-name { color: #8a97a5; transition: color .3s; }
+  .brand-card:hover .brand-name { color: var(--brand); }
+  .marquee-track { animation: marquee 35s linear infinite; }
+  .brands-marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 0.75rem)); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
+    .marquee-track li[aria-hidden="true"] { display: none; }
+  }
+</style>

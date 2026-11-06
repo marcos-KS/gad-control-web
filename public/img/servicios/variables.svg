@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#081726" />
+      <stop offset="100%" stop-color="#0E2338" />
+    </linearGradient>
+    <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#168BFF" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#3DDC97" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg3)" />
+
+  <!-- Silueta de Tanque / Reactor con Nivel de fluido -->
+  <g transform="translate(180, 240)">
+    <!-- Cuerpo del tanque -->
+    <rect x="-100" y="-120" width="200" height="240" rx="20" fill="#0C1D2E" stroke="#254361" stroke-width="4" />
+    <!-- Fluido interior cortado con nivel -->
+    <path d="M -96 0 Q -50 -15 0 0 T 96 0 L 96 100 Q 96 116 80 116 L -80 116 Q -96 116 -96 100 Z" fill="url(#liquid)" />
+    <!-- Escala de nivel graduada -->
+    <line x1="-80" y1="-80" x2="-65" y2="-80" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="-80" y1="-40" x2="-60" y2="-40" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="-80" y1="0" x2="-55" y2="0" stroke="#3DDC97" stroke-width="3" />
+    <line x1="-80" y1="40" x2="-60" y2="40" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="-80" y1="80" x2="-65" y2="80" stroke="#FFFFFF" stroke-width="2" />
+    <text x="-50" y="5" font-family="'Courier New', monospace" font-size="12" font-weight="bold" fill="#3DDC97">78.4% LEVEL</text>
+  </g>
+
+  <!-- Termopozo / Sensor de Temperatura RTD PT100 -->
+  <g transform="translate(420, 240)">
+    <!-- Cabezal DIN aluminio -->
+    <path d="M -30 -100 L 30 -100 L 40 -60 L -40 -60 Z" fill="#3A4E61" stroke="#168BFF" stroke-width="2" />
+    <!-- Vástago sensor introducido -->
+    <rect x="-6" y="-60" width="12" height="150" fill="#90A4B8" stroke="#102030" stroke-width="1.5" />
+    <path d="M -6 90 L 0 100 L 6 90 Z" fill="#90A4B8" />
+    <!-- Ondas térmicas / gradiente de temperatura -->
+    <path d="M 20 -10 Q 35 15 20 40 T 20 90" fill="none" stroke="#FF5722" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4" />
+    <path d="M 35 0 Q 50 25 35 50 T 35 100" fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round" />
+    <text x="-40" y="-115" font-family="'Courier New', monospace" font-size="15" font-weight="bold" fill="#FF5722">84.5 °C</text>
+  </g>
+
+  <!-- Manómetro de Presión y Caudalímetro -->
+  <g transform="translate(620, 240)">
+    <circle cx="0" cy="0" r="65" fill="#142B3F" stroke="#3DDC97" stroke-width="4" />
+    <circle cx="0" cy="0" r="52" fill="#081420" />
+    <!-- Graduación del manómetro -->
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#254361" stroke-width="2" stroke-dasharray="2 6" />
+    <!-- Aguja indicadora -->
+    <line x1="0" y1="0" x2="28" y2="-28" stroke="#3DDC97" stroke-width="3" stroke-linecap="round" />
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF" />
+    <text x="0" y="25" font-family="sans-serif" font-size="12" font-weight="bold" fill="#168BFF" text-anchor="middle">6.2 BAR</text>
+    <text x="0" y="-80" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#168BFF" text-anchor="middle">14.5 m³/h</text>
+  </g>
+
+  <text x="50" y="70" font-family="'Manrope', sans-serif" font-size="14" font-weight="800" letter-spacing="3" fill="#168BFF">VARIABLES PRINCIPALES</text>
+  <text x="50" y="95" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">Temperatura · Presión · Nivel · Caudal</text>
+  <text x="50" y="120" font-family="sans-serif" font-size="12" fill="#8FA4B8">RTD / Termocuplas · Manometría · Ultrasonido · Vórtex</text>
+</svg>

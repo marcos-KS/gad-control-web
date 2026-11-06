@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#081726" />
+      <stop offset="100%" stop-color="#0E243A" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg4)" />
+
+  <!-- Diagrama de lazo de control cerrado / Bloque PID -->
+  <!-- Setpoint -->
+  <g transform="translate(100, 240)">
+    <circle cx="0" cy="0" r="26" fill="#142C44" stroke="#168BFF" stroke-width="2" />
+    <text x="0" y="5" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">SP</text>
+    <path d="M 26 0 L 70 0" fill="none" stroke="#168BFF" stroke-width="3" marker-end="url(#arrow)" />
+  </g>
+
+  <!-- Nodo sumador / comparador de error -->
+  <g transform="translate(195, 240)">
+    <circle cx="0" cy="0" r="18" fill="#0C1D2E" stroke="#3DDC97" stroke-width="3" />
+    <line x1="-10" y1="0" x2="10" y2="0" stroke="#3DDC97" stroke-width="2" />
+    <line x1="0" y1="-10" x2="0" y2="10" stroke="#3DDC97" stroke-width="2" />
+    <text x="0" y="-24" font-family="sans-serif" font-size="11" font-weight="bold" fill="#3DDC97" text-anchor="middle">Error e(t)</text>
+    <path d="M 18 0 L 70 0" fill="none" stroke="#3DDC97" stroke-width="3" />
+  </g>
+
+  <!-- Controlador PID -->
+  <g transform="translate(340, 240)">
+    <rect x="-70" y="-55" width="140" height="110" rx="8" fill="#10263B" stroke="#168BFF" stroke-width="3" />
+    <text x="0" y="-25" font-family="'Manrope', sans-serif" font-size="16" font-weight="extrabold" fill="#FFFFFF" text-anchor="middle">PID</text>
+    <text x="0" y="-3" font-family="'Courier New', monospace" font-size="11" fill="#3DDC97" text-anchor="middle">Kp · Ti · Td</text>
+    <!-- Simulación gráfica curva de respuesta escalón -->
+    <path d="M -50 35 Q -30 -10 -15 25 T 15 20 T 50 20" fill="none" stroke="#3DDC97" stroke-width="2.5" />
+    <path d="M 70 0 L 130 0" fill="none" stroke="#168BFF" stroke-width="3" />
+  </g>
+
+  <!-- Actuador / Proceso Industrial -->
+  <g transform="translate(560, 240)">
+    <rect x="-80" y="-55" width="160" height="110" rx="8" fill="#14314E" stroke="#3DDC97" stroke-width="3" />
+    <text x="0" y="-20" font-family="'Manrope', sans-serif" font-size="15" font-weight="extrabold" fill="#FFFFFF" text-anchor="middle">PROCESO</text>
+    <text x="0" y="2" font-family="sans-serif" font-size="11" fill="#8FA4B8" text-anchor="middle">Planta / Actuadores</text>
+    <rect x="-55" y="16" width="110" height="18" rx="4" fill="#0A1826" />
+    <text x="0" y="30" font-family="'Courier New', monospace" font-size="11" fill="#3DDC97" text-anchor="middle">PV = 98.6 %</text>
+    <!-- Salida hacia el exterior -->
+    <path d="M 80 0 L 150 0" fill="none" stroke="#3DDC97" stroke-width="3" />
+  </g>
+
+  <!-- Lazo de retroalimentación (Feedback loop) -->
+  <path d="M 680 0 L 680 120 L -485 120 L -485 18" transform="translate(0, 240)" fill="none" stroke="#168BFF" stroke-width="2.5" stroke-dasharray="6 4" />
+  <text x="400" y="380" font-family="sans-serif" font-size="12" font-weight="bold" fill="#168BFF" text-anchor="middle">← RETROALIMENTACIÓN DE SENSOR (4-20mA / BUS) ←</text>
+
+  <text x="50" y="70" font-family="'Manrope', sans-serif" font-size="14" font-weight="800" letter-spacing="3" fill="#3DDC97">CONTROL EN LAZO CERRADO</text>
+  <text x="50" y="95" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">Automatización y Control de Procesos</text>
+  <text x="50" y="120" font-family="sans-serif" font-size="12" fill="#8FA4B8">Algoritmos PID · Secuencias automáticas · Estabilidad operativa</text>
+</svg>

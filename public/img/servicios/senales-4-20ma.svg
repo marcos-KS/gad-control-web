@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#081726" />
+      <stop offset="100%" stop-color="#102A44" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg7)" />
+
+  <!-- Multímetro / Calibrador de lazo tipo Fluke de campo -->
+  <g transform="translate(180, 240)">
+    <!-- Cuerpo del tester -->
+    <rect x="-80" y="-120" width="160" height="240" rx="16" fill="#1C3852" stroke="#3DDC97" stroke-width="3" />
+    <rect x="-65" y="-105" width="130" height="85" rx="6" fill="#081522" stroke="#168BFF" stroke-width="1.5" />
+    <!-- Lectura en mA -->
+    <text x="0" y="-62" font-family="'Courier New', monospace" font-size="28" font-weight="bold" fill="#3DDC97" text-anchor="middle">12.00</text>
+    <text x="0" y="-38" font-family="sans-serif" font-size="12" font-weight="bold" fill="#168BFF" text-anchor="middle">mA DC · 50.0%</text>
+
+    <!-- Selector rotativo / perilla -->
+    <circle cx="0" cy="20" r="35" fill="#0E2133" stroke="#526A82" stroke-width="2" />
+    <line x1="0" y1="5" x2="0" y2="35" stroke="#3DDC97" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Bornes y puntas de prueba con cables -->
+    <circle cx="-35" cy="85" r="8" fill="#E2000F" />
+    <circle cx="35" cy="85" r="8" fill="#111B24" />
+    <path d="M -35 93 Q -35 150 100 130" fill="none" stroke="#E2000F" stroke-width="4" />
+    <path d="M 35 93 Q 35 150 140 130" fill="none" stroke="#3DDC97" stroke-width="4" />
+  </g>
+
+  <!-- Gráfico de señal de corriente analógica 4 a 20 mA -->
+  <g transform="translate(500, 240)">
+    <!-- Ejes coordenados -->
+    <line x1="-150" y1="80" x2="220" y2="80" stroke="#486581" stroke-width="2" />
+    <line x1="-150" y1="80" x2="-150" y2="-110" stroke="#486581" stroke-width="2" />
+
+    <!-- Niveles de referencia -->
+    <line x1="-150" y1="45" x2="200" y2="45" stroke="#253E57" stroke-width="1.5" stroke-dasharray="4 4" />
+    <text x="-165" y="49" font-family="'Courier New', monospace" font-size="12" fill="#8FA4B8" text-anchor="end">4 mA (0%)</text>
+
+    <line x1="-150" y1="-80" x2="200" y2="-80" stroke="#253E57" stroke-width="1.5" stroke-dasharray="4 4" />
+    <text x="-165" y="-76" font-family="'Courier New', monospace" font-size="12" fill="#8FA4B8" text-anchor="end">20 mA (100%)</text>
+
+    <!-- Curva de rampa / modulación 4-20mA -->
+    <path d="M -150 45 L -70 45 L 30 -80 L 120 -80 L 170 -15 L 210 -15" fill="none" stroke="#3DDC97" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Puntos de muestreo -->
+    <circle cx="-70" cy="45" r="6" fill="#168BFF" stroke="#FFFFFF" stroke-width="1.5" />
+    <circle cx="30" cy="-80" r="6" fill="#3DDC97" stroke="#FFFFFF" stroke-width="1.5" />
+    <circle cx="120" cy="-80" r="6" fill="#168BFF" stroke="#FFFFFF" stroke-width="1.5" />
+    <circle cx="170" cy="-15" r="6" fill="#3DDC97" stroke="#FFFFFF" stroke-width="1.5" />
+  </g>
+
+  <text x="50" y="70" font-family="'Manrope', sans-serif" font-size="14" font-weight="800" letter-spacing="3" fill="#168BFF">CALIBRACIÓN DE BUCLE</text>
+  <text x="50" y="95" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">Señales Industriales de 4–20 mA</text>
+  <text x="50" y="120" font-family="sans-serif" font-size="12" fill="#8FA4B8">Inmunidad al ruido electromagnético · Verificación con fuente y simulador</text>
+</svg>

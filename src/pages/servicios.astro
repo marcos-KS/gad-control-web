@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { services } from '../data/services';
+---
+<Layout title="Servicios" description="Servicios de instrumentación, automatización y control industrial de G.A.D. Control.">
+  <PageHero eyebrow="Servicios" title="Instrumentación, automatización y control" text="Catálogo inicial de servicios. Está sujeto a confirmación y puede ajustarse en cualquier momento." />
+  <section class="section">
+    <div class="container-x grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {services.filter((s) => s.active).map((s) => <div class="reveal"><ServiceCard service={s} /></div>)}
+    </div>
+  </section>
+  <CtaBand />
+</Layout>

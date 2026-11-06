@@ -1,0 +1,27 @@
+---
+import Visual from './Visual.astro';
+import Icon from './Icon.astro';
+const { project } = Astro.props;
+---
+<article class="card card-hover group flex h-full flex-col overflow-hidden" data-category={project.category}>
+  <a href={`/proyectos/${project.slug}`} class="relative block h-52 overflow-hidden" tabindex="-1" aria-hidden="true">
+    <div class="zoom h-full w-full"><Visual src={project.image} icon="panel" alt={project.title} label={project.demo ? 'Demostración' : 'Proyecto'} /></div>
+    <div class="absolute inset-0 flex items-center justify-center bg-navy/0 transition-colors duration-300 group-hover:bg-navy/60">
+      <span class="flex translate-y-4 items-center gap-2 rounded-full bg-mint px-4 py-2 text-sm font-bold text-navy opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">Ver detalle <Icon name="arrow" class="h-4 w-4" /></span>
+    </div>
+    <span class="absolute left-3 top-3 rounded-full bg-navy/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-mint backdrop-blur">{project.category}</span>
+    {project.demo ? (
+      <span class="absolute right-3 top-3 rounded-full bg-amber-400 px-3 py-1 text-[11px] font-bold text-navy shadow">Ejemplo editable</span>
+    ) : (
+      <span class="absolute right-3 top-3 rounded-full bg-mint px-3 py-1 text-[11px] font-bold text-navy shadow">Proyecto Real</span>
+    )}
+  </a>
+  <div class="flex flex-1 flex-col p-6">
+    <h3 class="text-lg font-bold transition-colors group-hover:text-tech">{project.title}</h3>
+    <p class="mt-2 text-sm text-graphite">{project.summary}</p>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {project.equipment.slice(0, 3).map((e: string) => <li class="rounded-full border border-navy/10 bg-mist px-3 py-1 text-xs font-semibold text-graphite transition-colors group-hover:border-mint/40 group-hover:bg-mint-soft">{e}</li>)}
+    </ul>
+    <a href={`/proyectos/${project.slug}`} class="btn-outline-dark mt-auto self-start !mt-6">Ver proyecto</a>
+  </div>
+</article>

@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+import { nav, site, whatsappUrl } from '../data/site';
+const { current } = Astro.props;
+const active = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+---
+<header id="site-header" class="sticky top-0 z-50 border-b border-white/10 bg-navy/95 text-white backdrop-blur transition-shadow">
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3" aria-label="G.A.D. Control, inicio">
+      <img src="/logo.svg" alt="" class="h-9 w-9" />
+      <span class="leading-tight">
+        <span class="block text-base font-extrabold tracking-tight">G.A.D. Control</span>
+        <span class="hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-white/60 sm:block">Instrumentación y Control Industrial</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Principal">
+      {nav.map((n) => (
+        <a href={n.href} aria-current={active(n.href) ? 'page' : undefined}
+           class={`group relative rounded-md px-3 py-2 text-sm font-semibold transition-colors hover:text-mint ${active(n.href) ? 'text-white' : 'text-white/70'}`}>
+          {n.label}
+          <span class={`absolute inset-x-3 -bottom-0.5 h-0.5 origin-left rounded bg-mint transition-transform duration-300 ${active(n.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href={whatsappUrl()} target="_blank" rel="noopener" class="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-white/80 transition-colors hover:text-mint md:flex" aria-label="Escribir por WhatsApp">
+        <Icon name="phone" class="h-4 w-4" /> WhatsApp
+      </a>
+      <a href="/contacto" class="btn-primary hidden sm:inline-flex">Solicitar presupuesto</a>
+      <button id="menu-btn" class="rounded-md p-2 lg:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-navy lg:hidden">
+    <nav class="container-x flex flex-col py-3" aria-label="Móvil">
+      {nav.map((n) => (
+        <a href={n.href} class={`rounded-md px-2 py-3 text-base font-semibold ${active(n.href) ? 'text-electric' : 'text-white/90'}`}>{n.label}</a>
+      ))}
+      <a href="/ubicacion" class="rounded-md px-2 py-3 text-base font-semibold text-white/90">Ubicación</a>
+      <a href="/contacto" class="btn-primary mt-2">Solicitar presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn')!;
+  const menu = document.getElementById('mobile-menu')!;
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  });
+</script>

@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, whatsappUrl } from '../data/site';
+const { lat, lon } = site.map;
+const d = 0.06;
+const src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - d},${lat - d},${lon + d},${lat + d}&layer=mapnik&marker=${lat},${lon}`;
+---
+<Layout title="Ubicación" description="G.A.D. Control en San Martín, Mendoza, Argentina. Zona de cobertura y contacto.">
+  <PageHero eyebrow="Ubicación" title="San Martín, Mendoza, Argentina" text="Ubicación de referencia de la ciudad. No se publica dirección postal." />
+  <section class="section"><div class="container-x grid gap-10 lg:grid-cols-3">
+    <div class="overflow-hidden rounded-xl border border-navy/10 lg:col-span-2">
+      <iframe title="Mapa de San Martín, Mendoza" src={src} class="h-96 w-full" loading="lazy"></iframe>
+    </div>
+    <div class="space-y-4">
+      <div class="card card-hover p-6"><h2 class="font-bold">Zona de cobertura</h2>
+        <ul class="mt-3 space-y-2 text-sm text-graphite">{site.coverage.map((c) => <li class="flex gap-2"><Icon name="pin" class="h-4 w-4 mt-0.5 text-electric" />{c}</li>)}</ul></div>
+      <div class="card card-hover p-6"><h2 class="font-bold">Contacto</h2>
+        <ul class="mt-3 space-y-2 text-sm text-graphite">
+          <li><a class="font-semibold text-tech" href={whatsappUrl()} target="_blank" rel="noopener">WhatsApp {site.whatsappDisplay}</a></li>
+          <li>Correo: {site.email ?? 'a confirmar'}</li>
+          <li>Horarios: {site.hours ?? 'a confirmar'}</li>
+          <li>Dirección: {site.address ?? 'se coordina al consultar'}</li>
+        </ul></div>
+    </div>
+  </div></section>
+  <CtaBand />
+</Layout>
