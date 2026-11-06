@@ -1,12 +1,123 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
 ---
-<Layout title="Aviso de privacidad">
-  <PageHero title="Aviso de privacidad" />
-  <section class="section"><div class="container-x max-w-3xl space-y-4 text-graphite">
-    <p>Los datos enviados mediante el formulario de contacto se utilizan únicamente para responder su consulta o solicitud de presupuesto.</p>
-    <p>No se ceden a terceros. Puede solicitar su acceso, rectificación o eliminación escribiendo a G.A.D. Control.</p>
-    <p class="rounded bg-amber-50 p-3 text-sm text-amber-900">Borrador: revisar con un profesional y completar con los datos del responsable antes de publicar (Ley 25.326).</p>
-  </div></section>
+<Layout title="Aviso de Privacidad y Protección de Datos">
+  <PageHero
+    eyebrow="Términos &amp; Privacidad"
+    title="Aviso de Privacidad"
+    text="Conozca cómo protegemos, tratamos y resguardamos sus datos de contacto conforme a la Ley N° 25.326 de Protección de Datos Personales de la República Argentina."
+  />
+
+  <section class="section">
+    <div class="container-x max-w-4xl space-y-8">
+      <!-- Tarjeta 1: Responsable -->
+      <div class="card p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-mint-soft text-navy">
+            <Icon name="shield" class="h-6 w-6 text-tech" />
+          </span>
+          <h2 class="text-xl font-extrabold text-navy">1. Responsable del Tratamiento de Datos</h2>
+        </div>
+        <div class="mt-4 space-y-2 text-sm text-graphite leading-relaxed">
+          <p>El titular responsable del tratamiento de los datos personales recabados a través de este sitio web es:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong class="text-navy">Nombre comercial:</strong> G.A.D. Control</li>
+            <li><strong class="text-navy">Actividad:</strong> Instrumentación y Control Industrial</li>
+            <li><strong class="text-navy">Ubicación:</strong> San Martín, Mendoza, República Argentina</li>
+            <li><strong class="text-navy">Correo electrónico de contacto:</strong> <a href={`mailto:${site.email}`} class="font-semibold text-tech underline">{site.email}</a></li>
+            <li><strong class="text-navy">Teléfono / WhatsApp:</strong> {site.whatsappDisplay}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2: Datos que recopilamos -->
+      <div class="card p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-mint-soft text-navy">
+            <Icon name="sensor" class="h-6 w-6 text-tech" />
+          </span>
+          <h2 class="text-xl font-extrabold text-navy">2. Información que Recopilamos</h2>
+        </div>
+        <div class="mt-4 space-y-3 text-sm text-graphite leading-relaxed">
+          <p>A través de nuestro formulario de contacto y canales de atención, recopilamos únicamente los datos necesarios para brindar una respuesta técnica o comercial:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Datos identificatorios:</strong> Nombre y apellido.</li>
+            <li><strong>Datos de contacto:</strong> Dirección de correo electrónico, número de teléfono o WhatsApp.</li>
+            <li><strong>Datos de la empresa o instalación (opcional):</strong> Razón social o nombre de la planta industrial.</li>
+            <li><strong>Datos del requerimiento técnico:</strong> Servicio de interés y descripción del proyecto, equipo o necesidad de medición/control.</li>
+          </ul>
+          <p class="text-xs bg-mist p-3 rounded-lg border border-navy/10">
+            <strong>Nota:</strong> No recopilamos datos sensibles (origen étnico, convicciones religiosas, datos de salud ni financieros).
+          </p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3: Finalidad -->
+      <div class="card p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-mint-soft text-navy">
+            <Icon name="tools" class="h-6 w-6 text-tech" />
+          </span>
+          <h2 class="text-xl font-extrabold text-navy">3. Finalidad del Tratamiento</h2>
+        </div>
+        <div class="mt-4 space-y-2 text-sm text-graphite leading-relaxed">
+          <p>La información recopilada se utiliza exclusivamente para:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Responder a consultas, solicitudes de asesoramiento o peticiones de presupuesto técnico.</li>
+            <li>Coordinar visitas de relevamiento en planta o taller cuando sea solicitado.</li>
+            <li>Mantener una comunicación técnica fluida vinculada al proyecto o servicio contratado.</li>
+          </ul>
+          <p class="mt-2 font-semibold text-navy">G.A.D. Control no comercializa, no alquila ni cede sus datos personales a terceras empresas bajo ninguna circunstancia.</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 4: Derechos ARCO (Ley 25.326) -->
+      <div class="card p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-mint-soft text-navy">
+            <Icon name="check" class="h-6 w-6 text-mint" />
+          </span>
+          <h2 class="text-xl font-extrabold text-navy">4. Sus Derechos (Acceso, Rectificación y Supresión)</h2>
+        </div>
+        <div class="mt-4 space-y-3 text-sm text-graphite leading-relaxed">
+          <p>
+            De conformidad con la <strong>Ley de Protección de Datos Personales N° 25.326 de la República Argentina</strong>, usted tiene derecho a acceder a sus datos personales en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto, así como a solicitar su actualización, rectificación o eliminación de nuestras bases de datos en cualquier momento.
+          </p>
+          <p>
+            Para ejercer estos derechos, simplemente envíe un correo electrónico a <a href={`mailto:${site.email}`} class="font-bold text-tech underline">{site.email}</a> indicando su nombre y el requerimiento (ej.: <em>"Solicitud de supresión de datos de contacto"</em>).
+          </p>
+          <div class="p-4 rounded-xl bg-mist border border-navy/10 text-xs text-graphite">
+            <p class="font-bold text-navy">Información legal de la AAIP:</p>
+            <p class="mt-1">
+              La Agencia de Acceso a la Información Pública (AAIP), órgano de control de la Ley N° 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 5: Seguridad y cookies -->
+      <div class="card p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-mint-soft text-navy">
+            <Icon name="cpu" class="h-6 w-6 text-tech" />
+          </span>
+          <h2 class="text-xl font-extrabold text-navy">5. Seguridad, Enlaces y Navegación</h2>
+        </div>
+        <div class="mt-4 space-y-3 text-sm text-graphite leading-relaxed">
+          <p>
+            Este sitio web opera bajo el protocolo seguro <strong>HTTPS (cifrado SSL)</strong>, garantizando que los datos transmitidos entre su navegador y el servidor viajen de forma encriptada y protegida contra intercepciones.
+          </p>
+          <p>
+            El sitio no utiliza cookies invasivas de rastreo ni publicidad intrusiva de terceros. Los mapas interactivos (OpenStreetMap) se ofrecen únicamente para fines de referencia geográfica y ubicación de cobertura en San Martín, Mendoza.
+          </p>
+          <p class="text-xs text-graphite/80 pt-2 border-t border-navy/10">
+            Última actualización: Noviembre de 2026. G.A.D. Control se reserva el derecho de modificar el presente aviso para adaptarlo a novedades legislativas o técnicas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
